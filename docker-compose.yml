@@ -1,0 +1,9 @@
+version: '3.8'
+services:
+  inbank:
+    image: 'loan'
+    build:
+      context: .
+    container_name: loan
+    ports:
+      - "8080:8080"
