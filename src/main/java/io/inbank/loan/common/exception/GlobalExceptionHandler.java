@@ -1,5 +1,6 @@
 package io.inbank.loan.common.exception;
 
+import io.inbank.loan.common.model.error.EntityNotFoundErrorResponse;
 import io.inbank.loan.common.model.error.InvalidOperationErrorResponse;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -73,6 +74,17 @@ public class GlobalExceptionHandler {
     @ResponseBody
     public ValidationErrorResponse handleException(MethodArgumentNotValidException e, HttpServletResponse response) {
         return translateBindingResult(e.getBindingResult(), response, ARGUMENT_NOT_VALID);
+    }
+
+    @ExceptionHandler(EntityNotFoundException.class)
+    @ResponseBody
+    public EntityNotFoundErrorResponse handleValidationException(
+            HttpServletRequest request, HttpServletResponse response, EntityNotFoundException e
+    ) {
+        response.setContentType(MediaType.APPLICATION_JSON_VALUE);
+        response.setStatus(HttpStatus.NOT_FOUND.value());
+
+        return new EntityNotFoundErrorResponse(e);
     }
 
     private ValidationErrorResponse translateBindingResult(
