@@ -49,7 +49,7 @@ As a result please provide working code with a single api endpoint and front-end
    Spring Web responses and error handlers.
 3. API can be internal and external. There is versioning of API (/v1)
 
-• Estimate on how many transactions can your account application can handle per second on your development machine Used
+• Estimate on how many requests can 'loan service' handle per second on my development machine Used
 tool: *JMeter*. API: POST `v1/loan/decision`.
 
 | Thread count            |  Loop count   | Error Rate | Throughput(sec) |
@@ -65,7 +65,7 @@ tool: *JMeter*. API: POST `v1/loan/decision`.
 2. High Load. Let's say 2-3 million request per day. And the system cache profile data, save every request into Postgres DB for history. Could be need for analysis or AI team. Also, we have complicated formula that takes some ms for calculations. The system needs to process 2 million
    request per day, which is 2,000,000 requests / 20^5 seconds = 20 request per second (TPS). 15-20 TPS is
    not a big number for a Postgres database. Anyway it is obvious that the 'loan' domain will be loaded more than
-   the 'profile module hundreds or even a thousand times. The solution would be to take out the loan module
+   the 'profile' module hundreds or even a thousand times. The solution would be to take out the loan module
    separately and set auto-scale. We can name it as 'loan-decision' service.
 3. Postgres database replication. There will be a lot of insert probably we should think about sharding.
 
