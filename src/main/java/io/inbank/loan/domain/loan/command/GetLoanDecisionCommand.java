@@ -2,6 +2,7 @@ package io.inbank.loan.domain.loan.command;
 
 import io.inbank.loan.common.Command;
 import io.inbank.loan.domain.loan.model.LoanDecision;
+import io.inbank.loan.domain.loan.model.LoanLimitations;
 import io.inbank.loan.domain.profile.command.GetCreditThresholdByPersonalCodeCommand;
 import io.inbank.loan.domain.profile.serivce.ProfileRegisterApi;
 import io.inbank.loan.common.exception.EntityNotFoundException;
@@ -22,10 +23,10 @@ public class GetLoanDecisionCommand
         implements Command<GetLoanDecisionCommand.Parameter, GetLoanDecisionCommand.Result> {
 
     private final GetCreditThresholdByPersonalCodeCommand getCreditThresholdByPersonalCodeCommand;
-    private static final BigDecimal IDEAL_CREDIT_SCORE = BigDecimal.ONE;
-    private static final BigDecimal MIN_ALLOWED_CREDIT_AMOUNT = BigDecimal.valueOf(2000);
-    private static final BigDecimal MAX_ALLOWED_CREDIT_AMOUNT = BigDecimal.valueOf(10000);
-    private static final int MAX_LOAN_PERIOD_IN_MONTH = 60;
+    private static final BigDecimal IDEAL_CREDIT_SCORE = BigDecimal.valueOf(LoanLimitations.IDEAL_CREDIT_SCORE);
+    private static final BigDecimal MIN_ALLOWED_CREDIT_AMOUNT = BigDecimal.valueOf(LoanLimitations.MIN_ALLOWED_CREDIT_AMOUNT);
+    private static final BigDecimal MAX_ALLOWED_CREDIT_AMOUNT = BigDecimal.valueOf(LoanLimitations.MAX_ALLOWED_CREDIT_AMOUNT);
+    private static final int MAX_LOAN_PERIOD_IN_MONTH = LoanLimitations.MAX_LOAN_PERIOD_IN_MONTH;
 
     @Override
     public Result execute(Parameter parameters) {
@@ -34,7 +35,7 @@ public class GetLoanDecisionCommand
         var creditThreshold = getCreditThresholdByPersonalCodeCommand.execute(personalCode)
                 .orElseThrow(() -> getProfileNotFoundException(personalCode));
 
-        if (creditThreshold.hasDebt()) {
+        if (creditThreshold.hasDebt() == null || creditThreshold.hasDebt()) {
             return Result.builder()
                     .personalCode(personalCode)
                     .decision(LoanDecision.NEGATIVE)
@@ -108,7 +109,6 @@ public class GetLoanDecisionCommand
 
     private BigDecimal calculateClosestSuitableLoanAmount(int loanPeriod, BigDecimal creditModifier) {
         return creditModifier.multiply(BigDecimal.valueOf(loanPeriod));
-
     }
 
     private int calculatesLoanSuitablePeriod(BigDecimal loanAmount, BigDecimal creditModifier) {

@@ -1,4 +1,4 @@
-package io.inbank.loan.domain.loan;
+package io.inbank.loan.domain.loan.command;
 
 import io.inbank.loan.common.exception.EntityNotFoundException;
 import io.inbank.loan.common.exception.InvalidOperationException;
@@ -21,7 +21,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
 
 @ExtendWith(MockitoExtension.class)
-public class GetLoanDecisionCommandUnitTests {
+class GetLoanDecisionCommandUnitTests {
     @Mock
     private GetCreditThresholdByPersonalCodeCommand getCreditThresholdByPersonalCodeCommand;
     @InjectMocks

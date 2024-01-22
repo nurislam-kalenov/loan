@@ -18,32 +18,32 @@ public class ProfileRegisterApi {
 
     @PostConstruct
     void init() {
-        CREDIT_THRESHOLD_BY_PERSONAL_CODE.put("49002010965",
+        CREDIT_THRESHOLD_BY_PERSONAL_CODE.put("87103482516",
                 CreditThresholdResponse.builder()
-                        .personalCode("49002010965")
+                        .personalCode("87103482516")
                         .hasDebt(true)
                         .build());
-        CREDIT_THRESHOLD_BY_PERSONAL_CODE.put("49002010976",
+        CREDIT_THRESHOLD_BY_PERSONAL_CODE.put("59217648033",
                 CreditThresholdResponse.builder()
-                        .personalCode("49002010976")
+                        .personalCode("59217648033")
                         .hasDebt(false)
                         .segmentQualifier(SegmentQualifier.SEGMENT_1)
                         .build());
-        CREDIT_THRESHOLD_BY_PERSONAL_CODE.put("49002010987",
+        CREDIT_THRESHOLD_BY_PERSONAL_CODE.put("36490571280",
                 CreditThresholdResponse.builder()
-                        .personalCode("49002010987")
+                        .personalCode("36490571280")
                         .hasDebt(false)
                         .segmentQualifier(SegmentQualifier.SEGMENT_2)
                         .build());
-        CREDIT_THRESHOLD_BY_PERSONAL_CODE.put("49002010998",
+        CREDIT_THRESHOLD_BY_PERSONAL_CODE.put("20938465017",
                 CreditThresholdResponse.builder()
-                        .personalCode("49002010998")
+                        .personalCode("20938465017")
                         .hasDebt(false)
                         .segmentQualifier(SegmentQualifier.SEGMENT_3)
                         .build());
-        CREDIT_THRESHOLD_BY_PERSONAL_CODE.put("49002010999",
+        CREDIT_THRESHOLD_BY_PERSONAL_CODE.put("75321649008",
                 CreditThresholdResponse.builder()
-                        .personalCode("49002010998")
+                        .personalCode("75321649008")
                         .hasDebt(false)
                         .segmentQualifier(null)
                         .build());
