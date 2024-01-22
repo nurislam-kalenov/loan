@@ -1,7 +1,7 @@
 version: '3.8'
 services:
   inbank:
-    image: 'loan'
+    image: 'loan-service'
     build:
       context: .
     container_name: loan
