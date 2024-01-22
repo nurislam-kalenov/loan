@@ -32,7 +32,7 @@ As the scope of this solution you only need to support 4 different scenarios - a
     49002010998 - segment 3 (credit_modifier = 1000)
 
 If a person has debt then we do not approve any amount. If a person has no debt then we take the identifier and use it for calculating person's credit score taking into account the requested input. <br />
- Constraints:
+ Constraints: <br />
 Minimum input and output sum can be 2000 € Maximum input and output sum can be 10000 € Minimum loan period can be 12 months Maximum loan period can be 60 months <br />
 Scoring algorithm. For calculating credit score a really primitive algorithm should be implemented. You need to divide the credit modifier with the loan amount and multiply the result with the loan period in months. If the result is less than 1 then we would not approve such sum, if the result is larger or equal than 1 then we would approve this sum. <br />
 
@@ -59,7 +59,7 @@ tool: *JMeter*. API: POST `v1/loan/decision`.
 | 50                      | 100000        |      0.00% |              34 |
 | 70                      | 1000000       |      0.00% |              35 |
 
-# Scale applications horizontally and ideas.
+# Suggests:
 
 1. We could consider JexlEngine for formulas and store formulas in some external storage.
 2. High Load. Let's say 2-3 million request per day. And the system cache profile data, save every request into Postgres DB for history. Could be need for analysis or AI team. Also, we have complicated formula that takes some ms for calculations. The system needs to process 2 million
@@ -67,6 +67,4 @@ tool: *JMeter*. API: POST `v1/loan/decision`.
    not a big number for a Postgres database. Anyway it is obvious that the 'loan' domain will be loaded more than
    the 'profile' module hundreds or even a thousand times. The solution would be to take out the loan module
    separately and set auto-scale. We can name it as 'loan-decision' service.
-3. Postgres database replication. There will be a lot of insert probably we should think about sharding.
-
 
